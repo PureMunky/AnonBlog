@@ -5,9 +5,10 @@ var mongoose = require('mongoose'),
 
 var PostSchema = new Schema({
   Title: { type: String, required: true },
-  CreateDate: Date,
+  CreateDate: { type: Date, default: new Date() },
   Body: String,
-  Promoted: Date
+  Promoted: { type: Date, default: new Date() },
+  Parent: Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Post', PostSchema);
