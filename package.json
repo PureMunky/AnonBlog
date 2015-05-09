@@ -1,0 +1,30 @@
+{
+  "name": "ToDone",
+  "version": "0.0.1",
+  "description": "A simple todo app.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "~4.12.0",
+    "mongodb": "^1.4.34",
+    "mongoose": "^3.8.25",
+    "body-parser": "^1.12.2",
+    "moment": "^2.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jasmine-node spec",
+    "start": "iojs index.js",
+    "watch-test": "jasmine-node spec --autotest --watch .",
+    "watch-run": "nodemon --exec iojs index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PureMunky/ToDone.git"
+  },
+  "author": "Phil Corbett (@PureMunky)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PureMunky/ToDone/issues"
+  },
+  "homepage": "https://github.com/PureMunky/ToDone"
+}
