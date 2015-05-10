@@ -1,7 +1,31 @@
-﻿AnonBlog.Ctrls = {};
+﻿(function (AB) {
+  AB.Ctrls = AB.Ctrls || {};
 
-AnonBlog.Ctrls.Front = ['$scope', 'Posts', function ($scope, Posts) {
-  $scope.test = 'hello';
+  AB.Ctrls.Front = ['$scope', 'Posts', function ($scope, Posts) {
+    $scope.test = 'hello';
+    Posts.GetAll().then(function (data) {
+      $scope.posts = data.data;
+    });
 
-  $scope.test = Posts.Test();
-}];
+  }];
+
+  AB.Ctrls.Write = ['$scope', 'Posts', function ($scope, Posts) {
+    $scope.post = {
+      Title: '',
+      Body: ''
+    };
+
+    $scope.write = function () {
+      Posts.Write($scope.post).then(function (data) {
+        console.log(data);
+      });
+    };
+  }];
+
+  AB.Ctrls.View = ['$scope', '$routeParams', 'Posts', function ($scope, $routeParams, Posts) {
+    Posts.Get($routeParams.PostId).then(function (data) {
+      $scope.post = data.data;
+    });
+  }];
+
+}(AnonBlog));

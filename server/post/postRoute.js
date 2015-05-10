@@ -7,29 +7,26 @@ var postCtrl = require('./postCtrl.js');
 var rh = require('../routeHelper.js');
 
 router.get('/', function (req, res, next) {
-  post.find({ _owner: userId }, rh.resolve(res, next));
+  post.find({}, rh.resolve(res, next));
 });
 
 router.get('/:id', function (req, res, next) {
   if (req.params.id == -1) {
     rh.resolve(res, next)(null, new post({
       Title: '',
-      RepeatFormula: '',
-      Tags: [],
-      Contexts: [],
-      Description: ''
+      Body: ''
     }));
   } else {
-    todo.findOne({ _id: req.params.id }).exec(rh.resolve(res, next));
+    post.findOne({ _id: req.params.id }).exec(rh.resolve(res, next));
   }
 });
 
 router.put('/:id', function (req, res, next) {
-    todoCtrl.save(req.body, rh.resolve(res, next));
+  postCtrl.save(req.body, rh.resolve(res, next));
 });
 
 router.post('/', function (req, res, next) {
-    todoCtrl.save(req.body, rh.resolve(res, next));
+  postCtrl.save(req.body, rh.resolve(res, next));
 });
 
 module.exports = router;

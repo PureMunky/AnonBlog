@@ -9,6 +9,11 @@ app.use(bodyParser.json());
 app.use('/post', post);
 app.use(express.static(__dirname));
 
+// Server default.html when no page specified.
+app.get('/', function (req, res) {
+  res.sendFile('default.html', { root: __dirname });
+});
+
 app.listen(1337);
 console.log('web server listening');
 
