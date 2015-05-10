@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
-  Title: { type: String, required: true },
+  Title: String,
   CreateDate: { type: Date, default: new Date() },
   Body: String,
   Promoted: { type: Date, default: new Date() },
