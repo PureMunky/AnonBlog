@@ -15,7 +15,7 @@
     "test": "jasmine-node spec",
     "start": "iojs index.js",
     "watch-test": "jasmine-node spec --autotest --watch .",
-    "watch-run": "nodemon --exec iojs index.js"
+    "watch-start": "nodemon --exec iojs index.js"
   },
   "repository": {
     "type": "git",

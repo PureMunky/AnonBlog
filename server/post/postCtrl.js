@@ -13,6 +13,7 @@ function _save(post, cb) {
   }
 }
 
+// Promotes a post.
 function _promote(postId, cb) {
   postModel.findOne({ _id: postId }, function (err, dbPost) {
     var dbPromotedDate = moment(dbPost.Promoted);
@@ -26,6 +27,7 @@ function _promote(postId, cb) {
   });
 }
 
+// Gets the comments for a specific post.
 function _getComments(postId, cb) {
   postModel.find({ Parent: postId }, cb);
 }
