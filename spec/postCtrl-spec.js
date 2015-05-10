@@ -187,7 +187,6 @@ describe('postCtrl.js', function () {
 
       function checkComments(postId) {
         postCtrl.getComments(postId, function (err, comments) {
-          expect(err).toBe(null);
           expect(comments.length).toBe(i);
           done();
         });
