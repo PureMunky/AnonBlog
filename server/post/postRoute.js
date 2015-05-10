@@ -7,7 +7,7 @@ var postCtrl = require('./postCtrl.js');
 var rh = require('../routeHelper.js');
 
 router.get('/', function (req, res, next) {
-  post.find({}, rh.resolve(res, next));
+  post.find({ Parent: null }, rh.resolve(res, next));
 });
 
 router.get('/:id', function (req, res, next) {
@@ -19,6 +19,10 @@ router.get('/:id', function (req, res, next) {
   } else {
     post.findOne({ _id: req.params.id }).exec(rh.resolve(res, next));
   }
+});
+
+router.get('/:id/comments', function (req, res, next) {
+  postCtrl.getComments(req.params.id, rh.resolve(res, next));
 });
 
 router.put('/:id', function (req, res, next) {

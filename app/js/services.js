@@ -12,6 +12,10 @@
       return $http.get('/post/' + postId);
     };
 
+    service.GetComments = function (postId) {
+      return $http.get('/post/' + postId + '/comments');
+    };
+
     service.Write = function (post) {
       return $http.post('/post', post);
     };

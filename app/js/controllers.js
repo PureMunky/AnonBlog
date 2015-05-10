@@ -23,8 +23,16 @@
   }];
 
   AB.Ctrls.View = ['$scope', '$routeParams', 'Posts', function ($scope, $routeParams, Posts) {
+    $scope.form = {
+      comments: []
+    };
+
     Posts.Get($routeParams.PostId).then(function (data) {
       $scope.post = data.data;
+    });
+
+    Posts.GetComments($routeParams.PostId).then(function (data) {
+      $scope.form.comments = data.data;
     });
   }];
 
