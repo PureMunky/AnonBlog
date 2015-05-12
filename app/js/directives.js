@@ -47,4 +47,29 @@
 
     return directive;
   }]);
+
+  AB.Directives.Chat = AB.App.directive('abChat', function () {
+    var directive = {};
+
+    directive.restrict = 'A';
+
+    directive.templateUrl = 'app/partials/directives/chat.html';
+
+    directive.scope = {
+      postId: '='
+    };
+
+    directive.controller = ['$scope', 'Chat', function ($scope, Chat) {
+      $scope.messages = [];
+
+      Chat.onMessage($scope.postId, getMessage);
+
+      function getMessage(message) {
+        $scope.messages.push(message);
+        $scope.$apply();
+      }
+    }];
+
+    return directive;
+  });
 }(AnonBlog));
