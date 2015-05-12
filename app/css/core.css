@@ -1,5 +1,7 @@
 ﻿body {
     line-height: 30px;
+    font-family: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 18px;
 }
 
 .textBody {
