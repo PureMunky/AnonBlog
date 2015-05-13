@@ -61,12 +61,22 @@
 
     directive.controller = ['$scope', 'Chat', function ($scope, Chat) {
       $scope.messages = [];
+      $scope.form = {
+        message: ''
+      };
+
+      $scope.sendMessage = sendMessage;
 
       Chat.onMessage($scope.postId, getMessage);
 
       function getMessage(message) {
         $scope.messages.push(message);
         $scope.$apply();
+      }
+
+      function sendMessage() {
+        Chat.sendMessage($scope.postId, $scope.form.message);
+        $scope.form.message = '';
       }
     }];
 
