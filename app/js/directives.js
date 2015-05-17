@@ -56,7 +56,7 @@
     directive.templateUrl = 'app/partials/directives/chat.html';
 
     directive.scope = {
-      postId: '='
+      post: '='
     };
 
     directive.controller = ['$scope', 'Chat', function ($scope, Chat) {
@@ -67,15 +67,41 @@
 
       $scope.sendMessage = sendMessage;
 
-      Chat.onMessage($scope.postId, getMessage);
+      Chat.onMessage($scope.post._id, getMessage);
 
       function getMessage(message) {
         $scope.messages.push(message);
       }
 
       function sendMessage() {
-        Chat.sendMessage($scope.postId, $scope.form.message);
+        Chat.sendMessage($scope.post._id, $scope.form.message);
         $scope.form.message = '';
+      }
+    }];
+
+    return directive;
+  });
+
+  AB.Directives.Promote = AB.App.directive('abPromote', function () {
+    var directive = {};
+
+    directive.restrict = 'A';
+
+    directive.templateUrl = 'app/partials/directives/promote.html';
+
+    directive.scope = {
+      post: '='
+    };
+
+    directive.controller = ['$scope', 'Posts', function ($scope, Posts) {
+      $scope.promoted = false;
+
+      $scope.promote = _promote;
+
+      function _promote() {
+        Posts.Promote($scope.post._id).then(function (data) {
+          console.log(data);
+        });
       }
     }];
 
