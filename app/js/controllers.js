@@ -9,7 +9,7 @@
 
   }];
 
-  AB.Ctrls.Write = ['$scope', 'Posts', function ($scope, Posts) {
+  AB.Ctrls.Write = ['$scope', '$location', 'Posts', function ($scope, $location, Posts) {
     $scope.post = {
       Title: '',
       Body: ''
@@ -17,7 +17,7 @@
 
     $scope.write = function () {
       Posts.Write($scope.post).then(function (data) {
-        console.log(data);
+        $location.hash('/');
       });
     };
   }];

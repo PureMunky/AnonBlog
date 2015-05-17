@@ -71,7 +71,6 @@
 
       function getMessage(message) {
         $scope.messages.push(message);
-        $scope.$apply();
       }
 
       function sendMessage() {

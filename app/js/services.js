@@ -2,23 +2,33 @@
   AB.Services = AB.Services || {};
 
   AB.Services.Posts = AB.App.service('Posts', ['$http', function ($http) {
-    var service = {};
+    var service = {
+      Promote: _Promote,
+      GetAll: _GetAll,
+      Get: _Get,
+      GetComments: _GetComments,
+      Write: _Write
+    };
 
-    service.GetAll = function () {
+    function _GetAll() {
       return $http.get('/post');
-    };
+    }
 
-    service.Get = function (postId) {
+    function _Get(postId) {
       return $http.get('/post/' + postId);
-    };
+    }
 
-    service.GetComments = function (postId) {
+    function _GetComments(postId) {
       return $http.get('/post/' + postId + '/comments');
-    };
+    }
 
-    service.Write = function (post) {
+    function _Write (post) {
       return $http.post('/post', post);
-    };
+    }
+
+    function _Promote(postId) {
+      return $http.post('/post/' + postId + '/promote');
+    }
 
     return service;
   }]); 
@@ -80,7 +90,6 @@
         j = 0,
         found = false,
         newMessages = [];
-
       for (i = 0; i < current.length; i++) {
         found = false;
 
@@ -90,7 +99,7 @@
 
         if (!found) {
           newMessages.push(current[i]);
-          messages.push(current[i]);
+          messages[postId].push(current[i]);
         }
       }
 
