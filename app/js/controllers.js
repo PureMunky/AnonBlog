@@ -1,4 +1,4 @@
-﻿(function (AB) {
+(function (AB) {
   AB.Ctrls = AB.Ctrls || {};
 
   AB.Ctrls.Front = ['$scope', 'Posts', function ($scope, Posts) {

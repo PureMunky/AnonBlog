@@ -1,4 +1,4 @@
-﻿(function (AB) {
+(function (AB) {
   AB.Services = AB.Services || {};
 
   AB.Services.Posts = AB.App.service('Posts', ['$http', function ($http) {

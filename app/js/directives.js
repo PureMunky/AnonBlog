@@ -1,4 +1,4 @@
-﻿(function (AB) {
+(function (AB) {
   AB.Directives = AB.Directives || {};
 
   AB.Directives.Comment = AB.App.directive('abComment', ['Posts', function (Posts) {
@@ -6,7 +6,7 @@
 
     directive.restrict = 'A';
 
-    directive.templateUrl = 'app/partials/directives/comment.html';
+    directive.templateUrl = 'partials/directives/comment.html';
 
     directive.scope = {
       parent: '='
@@ -35,7 +35,7 @@
 
     directive.restrict = 'A';
 
-    directive.templateUrl = 'app/partials/directives/postComments.html';
+    directive.templateUrl = 'partials/directives/postComments.html';
 
     directive.scope = {
       comments: '='
@@ -53,7 +53,7 @@
 
     directive.restrict = 'A';
 
-    directive.templateUrl = 'app/partials/directives/chat.html';
+    directive.templateUrl = 'partials/directives/chat.html';
 
     directive.scope = {
       post: '='
@@ -87,7 +87,7 @@
 
     directive.restrict = 'A';
 
-    directive.templateUrl = 'app/partials/directives/promote.html';
+    directive.templateUrl = 'partials/directives/promote.html';
 
     directive.scope = {
       post: '='
