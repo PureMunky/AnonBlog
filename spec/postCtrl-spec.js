@@ -1,10 +1,10 @@
-﻿'use strict';
+'use strict';
 
 var postModel = require('../server/post/postModel.js'),
   postCtrl = require('../server/post/postCtrl.js'),
   mongoose = require('mongoose'),
   moment = require('moment'),
-  config = require('../server/config.js')['TEST'];
+  config = require('../server/config.js');
 
 
 
