@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 function _resolve (res, next) {
   return function (err, post) {
