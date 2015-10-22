@@ -1,7 +1,7 @@
-(function (AB) {
-  AB.Services = AB.Services || {};
-
-  AB.Services.Posts = AB.App.service('Posts', ['$http', function ($http) {
+(function () {
+  angular
+    .module('app')
+    .service('Posts', ['$http', function ($http) {
     var service = {
       Promote: _Promote,
       GetAll: _GetAll,
@@ -33,7 +33,9 @@
     return service;
   }]); 
 
-  AB.Services.Chat = AB.App.service('Chat', ['Posts', function (Posts) {
+  angular
+    .module('app')
+    .service('Chat', ['Posts', function (Posts) {
     var service = {
       onMessage: _onMessage,
       sendMessage: _sendMessage
@@ -108,4 +110,4 @@
 
     return service;
   }]);
-}(AnonBlog));
+}());

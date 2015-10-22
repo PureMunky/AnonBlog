@@ -1,7 +1,7 @@
-(function (AB) {
-  AB.Directives = AB.Directives || {};
-
-  AB.Directives.Comment = AB.App.directive('abComment', ['Posts', function (Posts) {
+(function () {
+  angular
+    .module('app')
+    .directive('abComment', ['Posts', function (Posts) {
     var directive = {};
 
     directive.restrict = 'A';
@@ -30,7 +30,9 @@
     return directive;
   }]);
 
-  AB.Directives.PostComment = AB.App.directive('abPostComments', ['Posts', function (Posts) {
+  angular
+    .module('app')
+    .directive('abPostComments', ['Posts', function (Posts) {
     var directive = {};
 
     directive.restrict = 'A';
@@ -48,7 +50,9 @@
     return directive;
   }]);
 
-  AB.Directives.Chat = AB.App.directive('abChat', function () {
+  angular
+    .module('app')
+    .directive('abChat', function () {
     var directive = {};
 
     directive.restrict = 'A';
@@ -82,7 +86,9 @@
     return directive;
   });
 
-  AB.Directives.Promote = AB.App.directive('abPromote', function () {
+  angular
+    .module('app')
+    .directive('abPromote', function () {
     var directive = {};
 
     directive.restrict = 'A';
@@ -108,11 +114,13 @@
     return directive;
   });
   
-  AB.Directives.Front = AB.App.directive('abFront', function () {
+  angular
+    .module('app')
+    .directive('abFront', function () {
     var directive = {};
     
     directive.restrict = 'A';
-    
+    directive.scope = {};
     directive.templateUrl = 'partials/directives/front.html';
     
     directive.controllerAs = 'vm';
@@ -120,8 +128,7 @@
     
     directive.controller = ['Posts', function (Posts) {
       var vm = this;
-      
-      vm.test = 'hello';
+     vm.test = 'front'; 
       Posts.GetAll().then(function (data) {
         vm.posts = data.data;
       });
@@ -130,4 +137,4 @@
     return directive;
   });
 
-}(AnonBlog));
+}());
