@@ -1,0 +1,13 @@
+{{vm.test}}
+<div ng-repeat="post in vm.posts">
+    <span ab-promote post="post"></span>
+    <a ng-href="#/{{post._id}}">
+        {{post.Title || 'No Title'}}
+    </a>
+    <div
+        class="postBody"
+        ng-class="{Expanded: post._id == vm.selectedId}"
+        ng-click="vm.selectedId = post._id">
+        {{post.Body}}
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿body {
+body {
     line-height: 30px;
     font-family: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
     font-size: 18px;
@@ -16,4 +16,15 @@
     width: 100%;
     border: 1px solid #EEEEEE;
     font-size: 20px;
+}
+
+.postBody {
+   max-height: 5em;
+   width: 100%;
+   overflow: hidden;
+   transition: max-height 1s;
+}
+
+.postBody.Expanded {
+    max-height: 100em;
 }

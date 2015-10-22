@@ -107,4 +107,27 @@
 
     return directive;
   });
+  
+  AB.Directives.Front = AB.App.directive('abFront', function () {
+    var directive = {};
+    
+    directive.restrict = 'A';
+    
+    directive.templateUrl = 'partials/directives/front.html';
+    
+    directive.controllerAs = 'vm';
+    directive.bindToController = true;
+    
+    directive.controller = ['Posts', function (Posts) {
+      var vm = this;
+      
+      vm.test = 'hello';
+      Posts.GetAll().then(function (data) {
+        vm.posts = data.data;
+      });
+    }];
+    
+    return directive;
+  });
+
 }(AnonBlog));

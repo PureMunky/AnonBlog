@@ -2,11 +2,6 @@
   AB.Ctrls = AB.Ctrls || {};
 
   AB.Ctrls.Front = ['$scope', 'Posts', function ($scope, Posts) {
-    $scope.test = 'hello';
-    Posts.GetAll().then(function (data) {
-      $scope.posts = data.data;
-    });
-
   }];
 
   AB.Ctrls.Write = ['$scope', '$location', 'Posts', function ($scope, $location, Posts) {
