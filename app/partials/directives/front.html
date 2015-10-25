@@ -1,3 +1,4 @@
+<div ab-post-view post="vm.currentPost"></div>
 <div ng-repeat="post in vm.posts">
     <span ab-promote post="post"></span>
     <a ng-href="#/{{post._id}}">
@@ -5,8 +6,8 @@
     </a>
     <div
         class="postBody"
-        ng-class="{Expanded: post._id == vm.selectedId}"
-        ng-click="vm.selectedId = post._id">
+        ng-class="{Expanded: post._id == vm.currentPost._id}"
+        ng-click="vm.currentPost = post">
         {{post.Body}}
     </div>
 </div>
