@@ -1,20 +1,24 @@
+$font-stack: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+
+$border-style: 1px solid #EEEEEE;
+
 body {
     line-height: 30px;
-    font-family: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-family: $font-stack;
     font-size: 18px;
 }
 
 .textBody {
     width: 100%;
     height: 300px;
-    border: 1px solid #EEEEEE;
-    font-family: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    border: $border-style;
+    font-family: $font-stack;
     font-size: 18px;
 }
 
 .textTitle {
     width: 100%;
-    border: 1px solid #EEEEEE;
+    border: $border-style;
     font-size: 20px;
 }
 
