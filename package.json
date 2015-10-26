@@ -1,7 +1,7 @@
 {
-  "name": "ToDone",
+  "name": "AnonBlog",
   "version": "0.0.1",
-  "description": "A simple todo app.",
+  "description": "A simple anonymouse blogging platform.",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.12.2",
