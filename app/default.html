@@ -8,6 +8,7 @@
     <link href="css/bundle.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="img/ToDone.png" />
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     
     <script type="text/javascript" src="js/bundle.min.js"></script>
@@ -15,7 +16,6 @@
 <body>
     <a ng-href="#/">Anonesty</a>
     <a ng-href="#/write">Write</a>
-    <div ab-front></div>
-    <div ab-write></div>
+    <div ng-view></div>
 </body>
 </html>
