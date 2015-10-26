@@ -17,7 +17,7 @@ function _save(post, cb) {
 function _promote(postId, cb) {
   postModel.findOne({ _id: postId }, function (err, dbPost) {
     var dbPromotedDate = moment(dbPost.Promoted);
-    console.log(dbPost);
+    
     if (dbPromotedDate.add(PROMOTE_TIME_HOURS, 'hours').diff(moment()) < 0) {
       dbPost.Promoted = new Date();
 
