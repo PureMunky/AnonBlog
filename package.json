@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "jasmine-node spec",
-    "start": "iojs index.js",
+    "start": "node index.js",
     "watch-test": "jasmine-node spec --autotest --watch .",
     "watch-start": "nodemon --exec iojs index.js"
   },
