@@ -12,19 +12,25 @@
         scope: {
           post: '='
         },
+        controllerAs: 'vm',
+        bindToController: true,
         controller: PromoteController
       };
       
-      PromoteController.$inject = ['$scope', 'Posts'];
+      PromoteController.$inject = ['Posts'];
       
-      function PromoteController ($scope, Posts) {
-        $scope.promoted = false;
+      function PromoteController (Posts) {
+        var vm = this;
+        
+        vm.promoted = false;
   
-        $scope.promote = _promote;
+        vm.promote = _promote;
   
         function _promote() {
-          Posts.Promote($scope.post._id).then(function (data) {
+          Posts.Promote(vm.post._id).then(function (data) {
             console.log(data);
+          }).catch(function(err) {
+            console.log(err);
           });
         }
       }
