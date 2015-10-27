@@ -15,14 +15,28 @@
         controller: FrontController
       };
       
-      FrontController.$inject = ['Posts'];
+      FrontController.$inject = ['Posts', 'textBodyService'];
       
-      function FrontController (Posts) {
+      function FrontController (Posts, textBodyService) {
         var vm = this;
         
-        Posts.GetAll().then(function (data) {
-          vm.posts = data.data;
-        });
+        vm.parseBody = _parseBody;
+        
+        // Start directive load.
+        _Load();
+        
+        // Loads the information needed for this directive.
+        function _Load () {
+          Posts.GetAll().then(function (data) {
+            vm.posts = data.data;
+          });
+        }
+        
+        // Parses the body of the post to make it render correctly and safely.
+        function _parseBody (input) {
+          return textBodyService.parse(input);
+        }
+        
       }
       
       return directive;

@@ -3,7 +3,5 @@
     <a ng-href="#/{{post._id}}">
         {{post.Title || 'No Title'}}
     </a>
-    <div>
-        {{post.Body}}
-    </div>
+    <div ng-bind-html="vm.parseBody(post.Body)"></div>
 </div>
