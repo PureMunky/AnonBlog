@@ -9,10 +9,16 @@
   function config($routeProvider) {
     $routeProvider
       .when('/', {
-        template: '<div ab-front></div>'
+        templateUrl: 'partials/frontpage.html',
+        controllerAs: 'vm',
+        bindToController: true,
+        controller: 'MainCtrl'
       })
       .when('/write', {
         template: '<div ab-write></div>'
+      })
+      .when('/:id', {
+        templateUrl: 'partials/view.html'
       })
       .otherwise({
         redirectTo: '/'
