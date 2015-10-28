@@ -14,9 +14,11 @@
     <script type="text/javascript" src="js/bundle.min.js"></script>
 </head>
 <body>
-    <a ng-href="#/">Anonesty</a>
-    <a ng-href="#/write">Write</a>
-    <a ng-href="#/helpout">Help</a>
-    <div ng-view></div>
+    <div class="topMenu">
+        <a class="logo" ng-href="#/">Anonesty</a>
+        <a class="right" ng-href="#/write">Write</a>
+        <a class="right" ng-href="#/helpout">Help</a>
+    </div>
+    <div class="mainBody" ng-view></div>
 </body>
 </html>

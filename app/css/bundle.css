@@ -1,18 +1,22 @@
 body {
   line-height: 30px;
   font-family: Helvetica, Arial, "DejaVu Sans", "Liberation Sans", Freesans, sans-serif;
-  font-size: 18px; }
+  font-size: 18px;
+  margin: 0px; }
+
+.mainBody {
+  margin: 30px 20px; }
 
 .textBody {
   width: 100%;
   height: 300px;
-  border: 1px solid #EEEEEE;
+  border: 1px solid #333333;
   font-family: Helvetica, Arial, "DejaVu Sans", "Liberation Sans", Freesans, sans-serif;
   font-size: 18px; }
 
 .textTitle {
   width: 100%;
-  border: 1px solid #EEEEEE;
+  border: 1px solid #333333;
   font-size: 20px; }
 
 .postBody {
@@ -23,3 +27,13 @@ body {
 
 .postBody.Expanded {
   max-height: 100em; }
+
+.topMenu {
+  background-color: #333333; }
+  .topMenu a {
+    color: #EEEEEE;
+    padding: 10px; }
+    .topMenu a.right {
+      text-align: right; }
+    .topMenu a.logo {
+      font-weight: bold; }

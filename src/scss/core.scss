@@ -1,11 +1,19 @@
 $font-stack: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
 
-$border-style: 1px solid #EEEEEE;
+$darkColor: #333333;
+$lightColor: #EEEEEE;
+
+$border-style: 1px solid $darkColor;
 
 body {
     line-height: 30px;
     font-family: $font-stack;
     font-size: 18px;
+    margin: 0px;
+}
+
+.mainBody {
+    margin: 30px 20px;    
 }
 
 .textBody {
@@ -31,4 +39,21 @@ body {
 
 .postBody.Expanded {
     max-height: 100em;
+}
+
+.topMenu {
+    background-color: $darkColor;
+    
+    a {
+        color: $lightColor;
+        padding: 10px;
+        
+        &.right {
+            text-align: right;
+        }
+        
+        &.logo {
+            font-weight: bold;
+        }
+    }
 }
