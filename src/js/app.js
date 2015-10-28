@@ -17,6 +17,9 @@
       .when('/write', {
         template: '<div ab-write></div>'
       })
+      .when('/helpout', {
+        templateUrl: 'partials/helpout.html'
+      })
       .when('/:id', {
         templateUrl: 'partials/view.html'
       })
