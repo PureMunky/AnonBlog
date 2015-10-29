@@ -25,17 +25,28 @@
         vm.form = {
           comments: []
         };
-        vm.PostBody = '';
+        vm.PostBody = _PostBody;
         
-        Posts.Get($routeParams.id).then(function (data) {
-          console.log(data);
-          vm.post = data.data; 
-          vm.PostBody = textBodyService.parse(vm.post.Body);
-        });
+        _Load();
         
-        Posts.GetComments($routeParams.id).then(function (data) {
-          vm.form.comments = data.data;
-        });
+        function _PostBody() {
+          return textBodyService.parse(vm.post.Body);
+        }
+        
+        function _Load () {
+          
+          // Load the post from the service.
+          Posts.Get($routeParams.id).then(function (data) {
+            console.log(data);
+            vm.post = data.data; 
+          });
+          
+          // Load the current comments from the server.
+          Posts.GetComments($routeParams.id).then(function (data) {
+            vm.form.comments = data.data;
+          });
+          
+        }
       }
       
       return directive;

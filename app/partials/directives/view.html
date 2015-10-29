@@ -1,6 +1,6 @@
 <h1>{{vm.post.Title}}</h2>
 <div ab-promote post="vm.post"></div>
-<div ng-bind-html="vm.PostBody"></div>
+<div ng-bind-html="vm.PostBody()"></div>
 
 <div ab-chat post="vm.post"></div>
 <a ng-click="vm.Load()">Load</a>
