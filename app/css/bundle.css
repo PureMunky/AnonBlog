@@ -10,13 +10,13 @@ body {
 .textBody {
   width: 100%;
   height: 300px;
-  border: 1px solid #333333;
+  border: 1px solid #184;
   font-family: Helvetica, Arial, "DejaVu Sans", "Liberation Sans", Freesans, sans-serif;
   font-size: 18px; }
 
 .textTitle {
   width: 100%;
-  border: 1px solid #333333;
+  border: 1px solid #184;
   font-size: 20px; }
 
 .postBody {
@@ -29,11 +29,13 @@ body {
   max-height: 100em; }
 
 .topMenu {
-  background-color: #333333; }
+  background-color: #184;
+  height: 100%; }
   .topMenu a {
-    color: #EEEEEE;
-    padding: 10px; }
-    .topMenu a.right {
-      text-align: right; }
+    color: #EEE;
+    padding: 0px 10px 0px 0px; }
     .topMenu a.logo {
-      font-weight: bold; }
+      font-weight: bold;
+      padding: 0px 10px; }
+  .topMenu .right {
+    float: right; }

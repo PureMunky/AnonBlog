@@ -1,7 +1,7 @@
 $font-stack: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
 
-$darkColor: #333333;
-$lightColor: #EEEEEE;
+$darkColor: #184;
+$lightColor: #EEE;
 
 $border-style: 1px solid $darkColor;
 
@@ -43,17 +43,19 @@ body {
 
 .topMenu {
     background-color: $darkColor;
+    height: 100%;
     
     a {
         color: $lightColor;
-        padding: 10px;
-        
-        &.right {
-            text-align: right;
-        }
+        padding: 0px 10px 0px 0px;
         
         &.logo {
             font-weight: bold;
+            padding: 0px 10px;
         }
+    }
+    
+    .right {
+        float: right;
     }
 }
