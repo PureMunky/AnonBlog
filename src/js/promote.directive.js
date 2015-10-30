@@ -17,14 +17,20 @@
         controller: PromoteController
       };
       
-      PromoteController.$inject = ['Posts'];
+      PromoteController.$inject = ['$timeout', 'Posts'];
       
-      function PromoteController (Posts) {
+      function PromoteController ($timeout, Posts) {
         var vm = this;
         
+        // Variables
         vm.promoted = false;
+        vm.remainingTime = 1000;
   
+        // Public Functions
         vm.promote = _promote;
+        vm.getRemaining = _getRemainign;
+        
+        _tickRemaining();
   
         function _promote() {
           Posts.Promote(vm.post._id).then(function (data) {
@@ -33,6 +39,17 @@
             console.log(err);
           });
         }
+        
+        function _tickRemaining() {
+          vm.remainingTime--;
+          
+          $timeout(_tickRemaining, 1000);
+        }
+        
+        function _getRemainign() {
+          return vm.remainingTime + ' Seconds';
+        }
+        
       }
   
       return directive;
