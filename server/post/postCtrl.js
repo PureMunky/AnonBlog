@@ -2,7 +2,7 @@
 
 var postModel = require('./postModel.js'),
   moment = require('moment'),
-  PROMOTE_TIME_HOURS = 4;
+  PROMOTE_TIME_MINUTES = 15;
 
 // Processes and save a todo to the database.
 function _save(post, cb) {
@@ -18,7 +18,7 @@ function _promote(postId, cb) {
   postModel.findOne({ _id: postId }, function (err, dbPost) {
     var dbPromotedDate = moment(dbPost.Promoted);
     
-    if (dbPromotedDate.add(PROMOTE_TIME_HOURS, 'hours').diff(moment()) < 0) {
+    if (dbPromotedDate.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment()) < 0) {
       dbPost.Promoted = new Date();
 
       dbPost.save(cb);
@@ -33,6 +33,24 @@ function _getComments(postId, cb) {
   postModel.find({ Parent: postId }, cb);
 }
 
+// Gets the remaining seconds for a post to be promoted again.
+function _getPromoteTime(postId, cb) {
+  postModel.findOne({ _id: postId}, function (err, dbPost) {
+    var dbPromotedDate = moment(dbPost.Promoted),
+      nextPromotedTime = dbPromotedDate.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment());
+    if (nextPromotedTime > 0) {
+      cb(null, {
+        remainingTime: nextPromotedTime
+      });
+    } else {
+      cb(null, {
+        remainingTime: 0
+      });
+    }
+  });
+}
+
 module.exports.save = _save;
 module.exports.promote = _promote;
 module.exports.getComments = _getComments;
+module.exports.getPromoteTime = _getPromoteTime;

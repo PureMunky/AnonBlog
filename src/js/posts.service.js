@@ -13,7 +13,8 @@
         GetAll: _GetAll,
         Get: _Get,
         GetComments: _GetComments,
-        Write: _Write
+        Write: _Write,
+        GetPromoteTime: _GetPromoteTime
       };
 
       function _GetAll() {
@@ -34,6 +35,10 @@
   
       function _Promote(postId) {
         return $http.post('/post/' + postId + '/promote');
+      }
+      
+      function _GetPromoteTime(postId) {
+        return $http.get('/post/' + postId + '/promote');
       }
 
     return service;

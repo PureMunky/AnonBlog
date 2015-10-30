@@ -103,6 +103,29 @@ describe('postCtrl.js', function () {
     }
 
   });
+  
+  it('gets promote seconds remaining', function(done) {
+    var source = {
+      Title: 'test title',
+      CreateDate: new Date(),
+      Body: 'test body',
+      Promoted: new Date()
+    };
+    
+    postCtrl.save(source, function (err, post) {
+      expect(err).toBe(null);
+      expect(post.Title).toBe(source.Title);
+      getPromoteTime(post);
+    });
+    
+    function getPromoteTime(post) {
+      postCtrl.getPromoteTime(post._id, function (err, response) {
+        expect(err).toBe(null);
+        expect(response.remainingTime).toBeGreaterThan(899000);
+        done();
+      }); 
+    }
+  });
 
   it('doesn\'t promote when timeframe is too short', function (done) {
     var source = {

@@ -33,6 +33,10 @@ router.post('/', function (req, res, next) {
   postCtrl.save(req.body, rh.resolve(res, next));
 });
 
+router.get('/:id/promote', function (req, res, next) {
+  postCtrl.getPromoteTime(req.params.id, rh.resolve(res, next));
+});
+
 router.post('/:id/promote', function (req, res, next) {
   postCtrl.promote(req.params.id, rh.resolve(res, next));
 });
