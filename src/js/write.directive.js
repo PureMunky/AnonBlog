@@ -16,9 +16,9 @@
       controller: writeController
     };
 
-    writeController.$inject = ['Posts'];
+    writeController.$inject = ['$location', 'Posts'];
     
-    function writeController (Posts) {
+    function writeController ($location, Posts) {
       var vm = this;
        
       vm.post = {
@@ -28,7 +28,7 @@
            
       vm.write = function () {
         Posts.Write(vm.post).then(function (data) {
-                  
+          $location.path('/');
         });
        }
     }
