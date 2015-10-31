@@ -16,12 +16,12 @@ function _save(post, cb) {
 // Promotes a post.
 function _promote(postId, cb) {
   postModel.findOne({ _id: postId }, function (err, dbPost) {
-    var dbPromotedDate = moment(dbPost.Promoted);
-    
-    if (dbPromotedDate.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment()) < 0) {
+    if (_getTimeToNextPromote(dbPost.Promoted) < 0 || dbPost.Promoted == null) {
       dbPost.Promoted = new Date();
 
-      dbPost.save(cb);
+      dbPost.save();
+      
+      _getPromoteTime(postId, cb);
     } else {
       cb(new Error('Cannot promote right now'));
     }
@@ -36,8 +36,8 @@ function _getComments(postId, cb) {
 // Gets the remaining seconds for a post to be promoted again.
 function _getPromoteTime(postId, cb) {
   postModel.findOne({ _id: postId}, function (err, dbPost) {
-    var dbPromotedDate = moment(dbPost.Promoted),
-      nextPromotedTime = dbPromotedDate.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment());
+    var nextPromotedTime = _getTimeToNextPromote(dbPost.Promoted);
+    
     if (nextPromotedTime > 0) {
       cb(null, {
         remainingTime: nextPromotedTime
@@ -48,6 +48,12 @@ function _getPromoteTime(postId, cb) {
       });
     }
   });
+}
+
+// Get the next time a post can be promoted
+function _getTimeToNextPromote(datetime) {
+  var mDateTime = moment(datetime);
+  return mDateTime.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment())
 }
 
 module.exports.save = _save;

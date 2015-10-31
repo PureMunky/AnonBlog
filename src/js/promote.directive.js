@@ -37,20 +37,23 @@
         // Directive Initial Load
         _Load();
         function _Load() {
-          Posts.GetPromoteTime(vm.post._id).then(function (data) {
-            if(data) {
-              _resetPromote(Math.round(data.data.remainingTime / 1000));
-            }
-          });
+          Posts.GetPromoteTime(vm.post._id).then(_processPromoteData);
         }
   
         // Promote the current post.
         function _promote() {
-          Posts.Promote(vm.post._id).then(function (data) {
-            _Load();
-          }).catch(function(err) {
-            console.log(err);
-          });
+          Posts.Promote(vm.post._id)
+            .then(_processPromoteData)
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
+        
+        // Callback for any call to the promote API.
+        function _processPromoteData(data) {
+            if(data) {
+              _resetPromote(Math.round(data.data.remainingTime / 1000));
+            }
         }
         
         // Updates the seconds remaining until the post can be promoted again.
