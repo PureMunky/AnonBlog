@@ -39,7 +39,7 @@
         function _Load() {
           Posts.GetPromoteTime(vm.post._id).then(function (data) {
             if(data) {
-              remainingSeconds = Math.round(data.data.remainingTime / 1000);
+              _resetPromote(Math.round(data.data.remainingTime / 1000));
             }
           });
         }
@@ -47,7 +47,7 @@
         // Promote the current post.
         function _promote() {
           Posts.Promote(vm.post._id).then(function (data) {
-            _resetPromote(data.remainingTime);
+            _Load();
           }).catch(function(err) {
             console.log(err);
           });
@@ -56,6 +56,15 @@
         // Updates the seconds remaining until the post can be promoted again.
         function _tickRemaining() {
           remainingSeconds--;
+          
+          if(remainingSeconds <= 0 && vm.promoted) {
+            vm.promoted = false;
+            _Load();
+          } else if (remainingSeconds <= 0) {
+            vm.promoted = false;
+          } else {
+            vm.promoted = true;
+          }
           
           if(timer && !_canPromote()) {
             $timeout.cancel(timer);
@@ -86,7 +95,7 @@
         
         // bool - returns if the post can currently be promoted.
         function _canPromote() {
-          return (remainingSeconds < 0);
+          return (remainingSeconds <= 0);
         }
         
         // Resets the timer with a new remaining time value.

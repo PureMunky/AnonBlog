@@ -1,7 +1,7 @@
 <div ng-repeat="post in vm.posts">
-    <span ab-promote post="post"></span>
     <a ng-href="#/{{post._id}}">
         {{post.Title || 'No Title'}}
     </a>
+    <span ab-promote post="post"></span>
     <div ng-bind-html="vm.parseBody(post.Body)"></div>
 </div>

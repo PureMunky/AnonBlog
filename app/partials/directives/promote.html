@@ -1,1 +1,4 @@
-﻿<button ng-click="vm.promote()">{{vm.getRemaining()}}</button>
+<div ng-class="{promoted: vm.promoted}">
+    <button ng-click="vm.promote()" ng-hide="vm.promoted">{{vm.getRemaining()}}</button>
+    <div ng-show="vm.promoted">Promoted for {{vm.getRemaining()}}</div>
+</div>

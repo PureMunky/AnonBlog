@@ -41,6 +41,11 @@ body {
     max-height: 100em;
 }
 
+.promoted {
+    background-color: $darkColor;
+    color: $lightColor;
+}
+
 .topMenu {
     background-color: $darkColor;
     height: 100%;

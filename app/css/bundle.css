@@ -28,6 +28,10 @@ body {
 .postBody.Expanded {
   max-height: 100em; }
 
+.promoted {
+  background-color: #184;
+  color: #EEE; }
+
 .topMenu {
   background-color: #184;
   height: 100%; }
