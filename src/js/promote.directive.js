@@ -52,7 +52,7 @@
         // Callback for any call to the promote API.
         function _processPromoteData(data) {
             if(data) {
-              _resetPromote(Math.round(data.data.remainingTime / 1000));
+              _resetPromote(Math.round(data.remainingTime / 1000));
             }
         }
         

@@ -28,7 +28,7 @@
         // Loads the information needed for this directive.
         function _Load () {
           Posts.GetAll().then(function (data) {
-            vm.posts = data.data;
+            vm.posts = data;
           });
         }
         
