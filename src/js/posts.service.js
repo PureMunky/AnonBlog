@@ -5,9 +5,9 @@
     .module('app')
     .service('Posts', PostsService);
     
-    PostsService.$inject = ['$http'];
+    PostsService.$inject = ['$http', '$q'];
     
-    function PostsService($http) {
+    function PostsService($http, $q) {
       var service = {
         Promote: _Promote,
         GetAll: _GetAll,
@@ -24,7 +24,19 @@
       }
   
       function _Get(postId) {
-        return $http.get('/post/' + postId).then(_ProcessPostData);
+        var deferred = $q.defer();
+        
+        if(postCache[postId]) {
+          deferred.resolve(postCache[postId]);
+        } else {
+          $http.get('/post/' + postId)
+            .then(_ProcessPostData)
+            .then(function (data) {
+              deferred.resolve(data);
+            });
+        }
+        
+        return deferred.promise;
       }
   
       function _GetComments(postId) {
@@ -44,15 +56,16 @@
       }
       
       function _ProcessPostData(data) {
+        var i = 0;
+        
         if (data.data instanceof Array) {
-          data.data.map(function(e) {
-            postCache[e._id] = e;
-          })
+          for(i = 0; i < data.data.length; i++) {
+            postCache[data.data[i]._id] = data.data[i];
+          }
         } else if (data.data._id) {
           postCache[data.data._id] = data.data;
         }
         
-        console.log(postCache);
         return data.data;
       }
       

@@ -36,16 +36,20 @@ function _getComments(postId, cb) {
 // Gets the remaining seconds for a post to be promoted again.
 function _getPromoteTime(postId, cb) {
   postModel.findOne({ _id: postId}, function (err, dbPost) {
-    var nextPromotedTime = _getTimeToNextPromote(dbPost.Promoted);
-    
-    if (nextPromotedTime > 0) {
-      cb(null, {
-        remainingTime: nextPromotedTime
-      });
+    if (err) {
+      cb(err);
     } else {
-      cb(null, {
-        remainingTime: 0
-      });
+      var nextPromotedTime = _getTimeToNextPromote(dbPost.Promoted);
+      
+      if (nextPromotedTime > 0) {
+        cb(null, {
+          remainingTime: nextPromotedTime
+        });
+      } else {
+        cb(null, {
+          remainingTime: 0
+        });
+      }
     }
   });
 }

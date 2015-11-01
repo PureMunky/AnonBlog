@@ -26,6 +26,10 @@
           comments: []
         };
         vm.PostBody = _PostBody;
+        vm.post = {
+          Title: 'hello',
+          Body: 'something'
+        }
         
         _Load();
         
@@ -34,7 +38,6 @@
         }
         
         function _Load () {
-          
           // Load the post from the service.
           Posts.Get($routeParams.id).then(function (data) {
             console.log(data);
@@ -42,9 +45,9 @@
           });
           
           // Load the current comments from the server.
-          Posts.GetComments($routeParams.id).then(function (data) {
-            vm.form.comments = data;
-          });
+          //Posts.GetComments($routeParams.id).then(function (data) {
+            //vm.form.comments = data;
+          //});
           
         }
       }
