@@ -4,6 +4,23 @@ var postModel = require('./postModel.js'),
   moment = require('moment'),
   PROMOTE_TIME_MINUTES = 15;
 
+// Gets all posts.
+function _getAll(cb) {
+  postModel.find({ Parent: null }, cb);
+}
+
+// Gets the post for the passed id.
+function _get(id, cb) {
+  if (id == -1) {
+    cb(null, new postModel({
+      Title: '',
+      Body: ''
+    }));
+  } else {
+    postModel.findOne({ _id: id }).exec(cb);
+  }
+}
+
 // Processes and save a todo to the database.
 function _save(post, cb) {
   if (post._id) {
@@ -18,6 +35,7 @@ function _promote(postId, cb) {
   postModel.findOne({ _id: postId }, function (err, dbPost) {
     if (_getTimeToNextPromote(dbPost.Promoted) < 0 || dbPost.Promoted == null) {
       dbPost.Promoted = new Date();
+      dbPost.PromotedCount++;
 
       dbPost.save();
       
@@ -43,11 +61,15 @@ function _getPromoteTime(postId, cb) {
       
       if (nextPromotedTime > 0) {
         cb(null, {
-          remainingTime: nextPromotedTime
+          remainingTime: nextPromotedTime,
+          promotedTime: ((dbPost.PromotedCount * PROMOTE_TIME_MINUTES * 60000) - nextPromotedTime),
+          totalTime: moment().diff(moment(dbPost.CreateDate))
         });
       } else {
         cb(null, {
-          remainingTime: 0
+          remainingTime: 0,
+          promotedTime: (dbPost.PromotedCount * PROMOTE_TIME_MINUTES * 60000),
+          totalTime: moment().diff(moment(dbPost.CreateDate))
         });
       }
     }
@@ -60,6 +82,8 @@ function _getTimeToNextPromote(datetime) {
   return mDateTime.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment())
 }
 
+module.exports.getAll = _getAll;
+module.exports.get = _get;
 module.exports.save = _save;
 module.exports.promote = _promote;
 module.exports.getComments = _getComments;

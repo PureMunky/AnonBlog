@@ -91,14 +91,22 @@ describe('postCtrl.js', function () {
     postCtrl.save(source, function (err, post) {
       expect(err).toBe(null);
       expect(post.Title).toBe(source.Title);
+      expect(post.PromotedCount).toBe(0);
       promote(post);
     });
 
     function promote(post) {
-      postCtrl.promote(post._id, function (err, post) {
+      postCtrl.promote(post._id, function (err, promoteModel) {
         expect(err).toBe(null);
-        expect(post.Promoted).not.toBe(source.Promoted);
-        done();
+        expect(promoteModel.remainingTime).not.toBe(0);
+        expect(promoteModel.totalTime).toBeGreaterThan(-1);
+        expect(promoteModel.promotedTime).toBeGreaterThan(-1);
+        
+        postCtrl.get(post._id, function (err, afterPost) {
+          expect(afterPost.PromotedCount).toBe(1);
+          done();
+        });
+        
       });
     }
 
@@ -218,7 +226,7 @@ describe('postCtrl.js', function () {
       writeComment()
 
     });
-
+    
   });
 
 });

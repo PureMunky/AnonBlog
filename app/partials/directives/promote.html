@@ -1,4 +1,5 @@
 <div ng-class="{promoted: vm.promoted}">
+    <div>{{vm.getPromotePercentage()}}</div>
     <button ng-click="vm.promote()" ng-hide="vm.promoted">{{vm.getRemaining()}}</button>
     <div ng-show="vm.promoted">Promoted for {{vm.getRemaining()}}</div>
 </div>

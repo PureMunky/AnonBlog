@@ -29,6 +29,7 @@
         // Public Functions
         vm.promote = _promote;
         vm.getRemaining = _getRemaining;
+        vm.getPromotePercentage = _getPromotePercentage;
         
         // Private Variables
         var timer,
@@ -53,6 +54,8 @@
         function _processPromoteData(data) {
             if(data) {
               _resetPromote(Math.round(data.remainingTime / 1000));
+              console.log(data);
+              vm.data = data;
             }
         }
         
@@ -94,6 +97,10 @@
           }
           
           return remainingTime;
+        }
+        
+        function _getPromotePercentage() {
+          return (vm.data.promotedTime / vm.data.totalTime) + '%'; 
         }
         
         // bool - returns if the post can currently be promoted.

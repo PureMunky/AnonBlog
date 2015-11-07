@@ -8,6 +8,7 @@ var PostSchema = new Schema({
   CreateDate: { type: Date, default: new Date() },
   Body: String,
   Promoted: { type: Date, default: null },
+  PromotedCount: { type: Number, default: 0 },
   Parent: Schema.Types.ObjectId
 });
 
