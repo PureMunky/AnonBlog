@@ -53,9 +53,8 @@
         // Callback for any call to the promote API.
         function _processPromoteData(data) {
           if(data) {
-            _resetPromote(Math.round(data.remainingTime / 1000));
             vm.data = data;
-            vm.promotePercentage = _getPromotePercentage();
+            _resetPromote(Math.round(vm.data.remainingTime / 1000));
           }
         }
         
