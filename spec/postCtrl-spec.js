@@ -83,7 +83,7 @@ describe('postCtrl.js', function () {
   it('promotes', function (done) {
     var source = {
       Title: 'test title',
-      CreateDate: new Date(),
+      CreateDate: '1/1/2000',
       Body: 'test body',
       Promoted: '1/1/2000' 
     };
@@ -101,6 +101,7 @@ describe('postCtrl.js', function () {
         expect(promoteModel.remainingTime).not.toBe(0);
         expect(promoteModel.totalTime).toBeGreaterThan(-1);
         expect(promoteModel.promotedTime).toBeGreaterThan(-1);
+        expect(promoteModel.promotedTime / promoteModel.totalTime).toBeGreaterThan(0);
         
         postCtrl.get(post._id, function (err, afterPost) {
           expect(afterPost.PromotedCount).toBe(1);

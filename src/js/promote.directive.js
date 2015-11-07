@@ -25,11 +25,11 @@
         
         // Public Variables
         vm.promoted = false;
+        vm.promotePercentage = '0%';
   
         // Public Functions
         vm.promote = _promote;
         vm.getRemaining = _getRemaining;
-        vm.getPromotePercentage = _getPromotePercentage;
         
         // Private Variables
         var timer,
@@ -52,11 +52,11 @@
         
         // Callback for any call to the promote API.
         function _processPromoteData(data) {
-            if(data) {
-              _resetPromote(Math.round(data.remainingTime / 1000));
-              console.log(data);
-              vm.data = data;
-            }
+          if(data) {
+            _resetPromote(Math.round(data.remainingTime / 1000));
+            vm.data = data;
+            vm.promotePercentage = _getPromotePercentage();
+          }
         }
         
         // Updates the seconds remaining until the post can be promoted again.
@@ -71,6 +71,8 @@
           } else {
             vm.promoted = true;
           }
+          
+          vm.promotePercentage = _getPromotePercentage();
           
           if(timer && !_canPromote()) {
             $timeout.cancel(timer);
@@ -100,7 +102,22 @@
         }
         
         function _getPromotePercentage() {
-          return (vm.data.promotedTime / vm.data.totalTime) + '%'; 
+          var rtnPerc = '0%';
+          
+          if(vm.data) {
+            rtnPerc = Math.round(
+              (
+                100 * 
+                (
+                  (vm.data.promotedTime - remainingSeconds)
+                  /
+                  (vm.data.totalTime - remainingSeconds)
+                ) 
+              )
+            ) + '%';
+          }
+          
+          return rtnPerc;
         }
         
         // bool - returns if the post can currently be promoted.

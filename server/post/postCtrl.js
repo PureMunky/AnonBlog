@@ -2,7 +2,8 @@
 
 var postModel = require('./postModel.js'),
   moment = require('moment'),
-  PROMOTE_TIME_MINUTES = 15;
+  PROMOTE_TIME_SECONDS = 900, // 15 Minutes
+  PROMOTE_TIME_MINUTES = PROMOTE_TIME_SECONDS / 60;
 
 // Gets all posts.
 function _getAll(cb) {
@@ -58,20 +59,13 @@ function _getPromoteTime(postId, cb) {
       cb(err);
     } else {
       var nextPromotedTime = _getTimeToNextPromote(dbPost.Promoted);
-      
-      if (nextPromotedTime > 0) {
-        cb(null, {
-          remainingTime: nextPromotedTime,
-          promotedTime: ((dbPost.PromotedCount * PROMOTE_TIME_MINUTES * 60000) - nextPromotedTime),
-          totalTime: moment().diff(moment(dbPost.CreateDate))
-        });
-      } else {
-        cb(null, {
-          remainingTime: 0,
-          promotedTime: (dbPost.PromotedCount * PROMOTE_TIME_MINUTES * 60000),
-          totalTime: moment().diff(moment(dbPost.CreateDate))
-        });
-      }
+      cb(null, {
+        promotedCount: dbPost.PromotedCount,
+        promoteTimeMinutes: PROMOTE_TIME_MINUTES,
+        remainingTime: nextPromotedTime,
+        promotedTime: ((dbPost.PromotedCount * PROMOTE_TIME_MINUTES * 60000) - nextPromotedTime),
+        totalTime: moment().diff(moment(dbPost.CreateDate))
+      });
     }
   });
 }
