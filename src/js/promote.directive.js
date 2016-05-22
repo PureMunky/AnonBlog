@@ -25,11 +25,12 @@
         
         // Public Variables
         vm.promoted = false;
-        vm.promotePercentage = '0%';
+        vm.totalTime = -1;
   
         // Public Functions
         vm.promote = _promote;
         vm.getRemaining = _getRemaining;
+        vm.promotePercentage = _getPromotePercentage;
         
         // Private Variables
         var timer,
@@ -54,6 +55,7 @@
         function _processPromoteData(data) {
           if(data) {
             vm.data = data;
+            vm.totalTime = vm.data.totalTime;
             _resetPromote(Math.round(vm.data.remainingTime / 1000));
           }
         }
@@ -70,8 +72,6 @@
           } else {
             vm.promoted = true;
           }
-          
-          vm.promotePercentage = _getPromotePercentage();
           
           if(timer && !_canPromote()) {
             $timeout.cancel(timer);

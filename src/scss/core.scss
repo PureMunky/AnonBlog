@@ -30,6 +30,22 @@ body {
     font-size: 20px;
 }
 
+.post {
+    border: 1px solid $lightColor;
+    margin-bottom: 15px;
+}
+
+.postTitle {
+    background-color: $lightColor;
+    padding: 5px;
+    
+    a {
+        color: $darkColor;
+        text-decoration: none;
+        font-weight: bold;
+    }
+}
+
 .postBody {
    max-height: 5em;
    width: 100%;
@@ -41,6 +57,14 @@ body {
     max-height: 100em;
 }
 
+.promote {
+    display: inline;
+    float: right;
+    padding: 0px 5px;
+    div {
+        display: inline;
+    }
+}
 .promoted {
     background-color: $darkColor;
     color: $lightColor;

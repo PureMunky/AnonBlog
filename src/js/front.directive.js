@@ -34,6 +34,10 @@
         
         // Parses the body of the post to make it render correctly and safely.
         function _parseBody (input) {
+          var output = input;
+          if(input.length > 300) {
+            input = input.substring(0, 300) + '...';
+          }
           return textBodyService.parse(input);
         }
         

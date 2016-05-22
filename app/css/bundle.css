@@ -19,6 +19,18 @@ body {
   border: 1px solid #184;
   font-size: 20px; }
 
+.post {
+  border: 1px solid #EEE;
+  margin-bottom: 15px; }
+
+.postTitle {
+  background-color: #EEE;
+  padding: 5px; }
+  .postTitle a {
+    color: #184;
+    text-decoration: none;
+    font-weight: bold; }
+
 .postBody {
   max-height: 5em;
   width: 100%;
@@ -27,6 +39,13 @@ body {
 
 .postBody.Expanded {
   max-height: 100em; }
+
+.promote {
+  display: inline;
+  float: right;
+  padding: 0px 5px; }
+  .promote div {
+    display: inline; }
 
 .promoted {
   background-color: #184;

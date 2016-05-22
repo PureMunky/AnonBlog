@@ -59,6 +59,8 @@ function _getPromoteTime(postId, cb) {
       cb(err);
     } else {
       var nextPromotedTime = _getTimeToNextPromote(dbPost.Promoted);
+      console.log(moment(dbPost.CreateDate));
+      console.log(moment());
       cb(null, {
         promotedCount: dbPost.PromotedCount,
         promoteTimeMinutes: PROMOTE_TIME_MINUTES,
