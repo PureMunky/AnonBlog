@@ -20,16 +20,26 @@
       function FrontController (Posts, textBodyService) {
         var vm = this;
         
+        vm.posts = [];
+        
         vm.parseBody = _parseBody;
         
         // Start directive load.
-        _Load();
+        _Load().then(function (data) {
+            var i = 0;
+            
+            for(i = 0; i < data.length;i ++) {
+              vm.posts.push(_TranslatePost((data[i])));
+            }
+          });
         
         // Loads the information needed for this directive.
         function _Load () {
-          Posts.GetAll().then(function (data) {
-            vm.posts = data;
-          });
+          return Posts.GetAll();
+        }
+        
+        function _TranslatePost(post) {
+          return post;
         }
         
         // Parses the body of the post to make it render correctly and safely.

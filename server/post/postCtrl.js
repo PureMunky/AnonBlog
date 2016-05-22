@@ -34,7 +34,7 @@ function _save(post, cb) {
 // Promotes a post.
 function _promote(postId, cb) {
   postModel.findOne({ _id: postId }, function (err, dbPost) {
-    if (_getTimeToNextPromote(dbPost.Promoted) < 0 || dbPost.Promoted == null) {
+    if (_getTimeToNextPromote(dbPost.Promoted) == 0 || dbPost.Promoted == null) {
       dbPost.Promoted = new Date();
       dbPost.PromotedCount++;
 
@@ -59,8 +59,6 @@ function _getPromoteTime(postId, cb) {
       cb(err);
     } else {
       var nextPromotedTime = _getTimeToNextPromote(dbPost.Promoted);
-      console.log(moment(dbPost.CreateDate));
-      console.log(moment());
       cb(null, {
         promotedCount: dbPost.PromotedCount,
         promoteTimeMinutes: PROMOTE_TIME_MINUTES,
@@ -74,8 +72,10 @@ function _getPromoteTime(postId, cb) {
 
 // Get the next time a post can be promoted
 function _getTimeToNextPromote(datetime) {
-  var mDateTime = moment(datetime);
-  return mDateTime.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment())
+  var mDateTime = moment(datetime),
+    rtnVal = mDateTime.add(PROMOTE_TIME_MINUTES, 'minutes').diff(moment());
+    
+  return (rtnVal > 0) ? rtnVal : 0;
 }
 
 module.exports.getAll = _getAll;
