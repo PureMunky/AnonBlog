@@ -26,11 +26,11 @@
         // Public Variables
         vm.promoted = false;
         vm.totalTime = -1;
+        vm.promotePercentage = '0%';
   
         // Public Functions
         vm.promote = _promote;
         vm.getRemaining = _getRemaining;
-        vm.promotePercentage = _getPromotePercentage;
         
         // Private Variables
         var timer,
@@ -73,6 +73,8 @@
             vm.promoted = true;
           }
           
+          vm.promotePercentage = _getPromotePercentage();
+          
           if(timer && !_canPromote()) {
             $timeout.cancel(timer);
           }
@@ -102,7 +104,6 @@
         
         function _getPromotePercentage() {
           var rtnPerc = '0%';
-          
           if(vm.data) {
             rtnPerc = Math.round(
               (
