@@ -5,9 +5,9 @@
     .module('app')
     .service('Posts', PostsService);
     
-    PostsService.$inject = ['$http', '$q'];
+    PostsService.$inject = ['$http', '$q', 'errorMessageSvc'];
     
-    function PostsService($http, $q) {
+    function PostsService($http, $q, errorMessageSvc) {
       var service = {
         Promote: _Promote,
         GetAll: _GetAll,
@@ -55,21 +55,31 @@
         return $http.get('/post/' + postId + '/promote').then(_ProcessPromoteData);
       }
       
-      function _ProcessPostData(data) {
-        var i = 0;
+      function _ProcessPostData(response) {
+        var i = 0,
+          data = response.data;
         
-        if (data.data instanceof Array) {
-          for(i = 0; i < data.data.length; i++) {
-            postCache[data.data[i]._id] = data.data[i];
+        if(data.success) {
+          if (data.data instanceof Array) {
+            for(i = 0; i < data.data.length; i++) {
+              postCache[data.data[i]._id] = data.data[i];
+            }
+          } else if (data.data._id) {
+            postCache[data.data._id] = data.data;
           }
-        } else if (data.data._id) {
-          postCache[data.data._id] = data.data;
+        } else {
+          errorMessageSvc.sendMessage(data.message + ': Error getting post data.');
         }
         
         return data.data;
       }
       
-      function _ProcessPromoteData(data) {
+      function _ProcessPromoteData(response) {
+        var data = response.data;
+        
+        if(!data.success) {
+          errorMessageSvc.sendMessage(data.message || ': Error getting promotion data.');
+        }
         return data.data;
       }
 
