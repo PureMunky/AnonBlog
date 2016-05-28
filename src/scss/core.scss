@@ -2,6 +2,7 @@ $font-stack: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-
 
 $darkColor: #184;
 $lightColor: #EEE;
+$errorColor: #900;
 
 $border-style: 1px solid $darkColor;
 
@@ -87,4 +88,19 @@ body {
     .right {
         float: right;
     }
+}
+
+.error {
+    background-color: $errorColor;
+    color: $lightColor;
+    padding: 10px;
+    
+    .button {
+        margin: 5px;
+        float: right;
+    }
+}
+
+.smallText {
+    font-size: .7em;
 }

@@ -20,7 +20,8 @@
     function ErrorController (errorMessageSvc) {
       var vm = this;
       
-      vm.messages = [];
+      vm.messages = ['Server Error: Error getting post data.',
+        'Server Error: Error getting promotion data.'];
       
       function getMessage(msg) {
         vm.messages.push(msg);
