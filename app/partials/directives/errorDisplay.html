@@ -1,0 +1,9 @@
+<div ng-if="vm.messages.length > 0">
+  <div ng-if="vm.messages.length > 1">
+    Message 1 of {{vm.messages.length}}.
+  </div>
+  <div>
+    {{vm.messages[0]}}
+  </div>
+  <button ng-click="vm.dismissMessage()">Dismiss</button>
+</div>

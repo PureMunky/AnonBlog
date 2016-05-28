@@ -3,7 +3,7 @@
   
   angular
     .module('app')
-    .service('errorMessage', ErrorMessageService);
+    .service('errorMessageSvc', ErrorMessageService);
     
     ErrorMessageService.$inject = [];
     
