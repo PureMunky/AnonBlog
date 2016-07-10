@@ -17,9 +17,9 @@
         controller: PromoteController
       };
       
-      PromoteController.$inject = ['$timeout', 'Posts'];
+      PromoteController.$inject = ['Posts', 'globalTimerSvc'];
       
-      function PromoteController ($timeout, Posts) {
+      function PromoteController (Posts, globalTimerSvc) {
         // ViewModel Definition
         var vm = this;
         
@@ -80,7 +80,8 @@
           }
           
           if (!_canPromote()) {
-            timer = $timeout(_tickRemaining, 1000);
+            globalTimerSvc.addTicker(_tickRemaining, 1000);
+            // timer = $timeout(_tickRemaining, 1000);
           }
         }
         

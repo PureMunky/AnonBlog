@@ -5,9 +5,9 @@
     .module('app')
     .service('globalTimerSvc', GlobalTimerService);
     
-    GlobalTimerService.$inject = [];
+    GlobalTimerService.$inject = ['$timeout'];
     
-    function GlobalTimerService() {
+    function GlobalTimerService($timeout) {
       var exports = {},
         tickers = [];
       
@@ -17,6 +17,24 @@
           interval: interval,
           sinceLast: 0
         });
+        
+        tick();
+      }
+      
+      function smallestInterval() {
+        var i = 0,
+          currInterval,
+          rtnInterval;
+        
+        for (i = 0; i < tickers.length; i++) {
+          currInterval = tickers[i].interval - tickers[i].sinceLast;
+          
+          if(currInterval < rtnInterval || rtnInterval === undefined){
+            rtnInterval = currInterval;
+          }
+        }
+        
+        return rtnInterval;
       }
       
       function tick() {
@@ -28,6 +46,8 @@
             tickers.func();
           }
         }
+        
+        $timeout(tick, smallestInterval());
       }
       
       exports.addTicker = addTicker;
